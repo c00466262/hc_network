@@ -1,0 +1,42 @@
+/*用户需要根据自己情况修改的文件*/
+#include "clicmd.h"
+#include "clicmddef.h"
+#include "config.h"
+
+#ifdef CLI_SUPPORT
+CLICMDMAP cliDefinedCmdMapTab[] = 
+{
+	/*系统基本命令*/
+	{"show run", {"show", "run", NULL}, 2, cli_show_run},
+
+#ifdef HCTEL_3AH_OAM_SUPPORT	
+	{"show dot3ah", {"show", "dot3ah", NULL}, 2, cli_show_dot3ah},
+	{"rmt lb <\"enable\"|\"disable\">", {"rmt", "lb", NULL}, 2, cli_set_rmt_lb},
+#endif
+
+	{"show version", {"show", "version", NULL}, 2, cli_show_version},
+
+#ifdef NET_SUPPORT
+	{"set mac <BYTE6 - BYTE1>", {"set", "mac", NULL}, 2, cli_set_mac},
+	{"set ip <ip-ddress> <subnet-mask>", {"set", "ip", NULL}, 2, cli_set_ip},	
+	{"set gateway <gateway>", {"set", "gateway", NULL}, 2, cli_set_gateway},
+#endif
+
+	/*调试接口*/
+#ifdef NET_SUPPORT	
+	{"debug net", {"debug", "net", NULL}, 2, cli_debug_net},
+	{"no debug net", {"no", "debug", "net", NULL}, 3, cli_no_debug_net},	
+#endif
+
+#ifdef HCTEL_3AH_OAM_SUPPORT
+	{"debug dot3ah", {"debug", "dot3ah", NULL}, 2, cli_debug_dot3ah},
+	{"no debug dot3ah", {"no", "debug", "dot3ah", NULL}, 3, cli_no_debug_dot3ah},
+#endif
+	
+	{"get mii <reg>", {"get", "mii", NULL}, 2, cli_get_mii},
+	{"set mii <reg> <value>", {"set", "mii", NULL}, 2, cli_set_mii},
+	{"show armreg <addr>", {"show", "armreg", NULL}, 2, cli_show_reg_arm},
+	{NULL, {NULL},0, NULL}
+};
+#endif
+
