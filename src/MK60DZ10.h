@@ -232,7 +232,8 @@ typedef enum {
  * @addtogroup Peripheral_defines Peripheral type defines
  * @{
  */
-
+#define ERROR	(0)
+#define OK		(1)
 
 /*
 ** Start of section using anonymous unions
